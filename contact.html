@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Free Quote · Richmar Energies — Generac Sales, Install &amp; Service</title>
+<meta name="description" content="Request a free on-site generator quote. Serving Oakwood, IL and 50 miles around. Call (906) 869-8956." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .quote-shell {
+    display: grid; grid-template-columns: 1fr; gap: 0;
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--paper);
+    box-shadow: var(--shadow);
+  }
+  @media (min-width: 980px) { .quote-shell { grid-template-columns: 1.3fr 1fr; } }
+
+  .quote-form { padding: clamp(28px, 4vw, 56px); }
+  .quote-form h1 { font-size: clamp(32px, 4vw, 52px); }
+  .quote-form .lead { margin-top: 16px; }
+
+  .progress {
+    display: flex; gap: 8px; margin-top: 28px;
+    font-family: var(--t-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .progress span { display: flex; gap: 8px; align-items: center; padding: 6px 10px; border: 1px solid var(--hairline); border-radius: 99px; background: var(--paper); cursor: pointer; transition: all .15s; }
+  .progress span.active { background: var(--brand); color: white; border-color: var(--brand); }
+  .progress span.done { color: var(--good); border-color: oklch(0.85 0.10 155); background: oklch(0.97 0.04 155); }
+  .progress span .n { width: 18px; height: 18px; border-radius: 50%; background: rgba(0,0,0,.08); display: grid; place-items: center; font-size: 10px; }
+  .progress span.active .n { background: rgba(255,255,255,.25); }
+
+  .field-grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 32px; }
+  @media (min-width: 600px) { .field-grid.two { grid-template-columns: 1fr 1fr; } }
+
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field label {
+    font-family: var(--t-mono); font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-mute); font-weight: 500;
+  }
+  .field input, .field select, .field textarea {
+    font: inherit; font-size: 16px;
+    padding: 14px 16px;
+    border: 1px solid var(--hairline);
+    border-radius: 10px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color .12s, box-shadow .12s;
+    width: 100%;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none; border-color: var(--brand);
+    box-shadow: 0 0 0 4px oklch(0.52 0.18 252 / .12);
+  }
+  .field textarea { min-height: 110px; resize: vertical; font-family: var(--t-body); }
+  .field .hint { font-size: 12px; color: var(--ink-mute); }
+
+  /* Choice tiles */
+  .choices {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+  }
+  @media (min-width: 600px) { .choices { grid-template-columns: repeat(3, 1fr); } }
+  .choice {
+    position: relative;
+    border: 1.5px solid var(--hairline);
+    border-radius: 10px;
+    padding: 14px;
+    cursor: pointer;
+    transition: all .15s;
+    background: var(--paper);
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .choice:hover { border-color: var(--brand); }
+  .choice input { position: absolute; opacity: 0; pointer-events: none; }
+  .choice input:checked ~ .ctop {  }
+  .choice:has(input:checked) {
+    border-color: var(--brand); background: oklch(0.97 0.04 252);
+    box-shadow: 0 0 0 3px oklch(0.52 0.18 252 / .12);
+  }
+  .choice .ctop { font-weight: 600; font-size: 14px; }
+  .choice .cbot { font-size: 12px; color: var(--ink-mute); font-family: var(--t-mono); }
+  .choice:has(input:checked) .check { opacity: 1; }
+  .choice .check {
+    position: absolute; top: 8px; right: 8px;
+    width: 18px; height: 18px;
+    background: var(--brand); border-radius: 50%;
+    display: grid; place-items: center; color: white;
+    opacity: 0; transition: opacity .15s;
+  }
+  .choice .check svg { width: 11px; height: 11px; }
+
+  .submit-row {
+    display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+    margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--hairline);
+  }
+  .submit-row .reassurance {
+    font-size: 13px; color: var(--ink-mute); display: flex; gap: 8px; align-items: center;
+  }
+  .submit-row .reassurance svg { width: 14px; height: 14px; color: var(--good); }
+
+  /* Right rail */
+  .quote-rail {
+    background: var(--navy);
+    color: white;
+    padding: clamp(28px, 4vw, 48px);
+    position: relative;
+    overflow: hidden;
+  }
+  .quote-rail::before {
+    content: ""; position: absolute; inset: auto -20% -40% auto; width: 80%; aspect-ratio: 1;
+    border-radius: 50%; background: radial-gradient(circle, oklch(0.45 0.20 252 / .4), transparent 65%);
+  }
+  .quote-rail .inner { position: relative; z-index: 1; }
+  .quote-rail h3 { color: white; font-size: 22px; margin-bottom: 18px; }
+  .quote-rail dl { margin: 0; display: grid; gap: 16px; }
+  .quote-rail dt { font-family: var(--t-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: oklch(0.78 0.06 250); }
+  .quote-rail dd { margin: 4px 0 0; font-size: 16px; }
+  .quote-rail dd a { color: white; }
+  .quote-rail dd a:hover { color: oklch(0.85 0.12 250); }
+
+  .timeline-list { margin-top: 28px; padding-top: 28px; border-top: 1px solid oklch(0.30 0.07 252); }
+  .tl { display: flex; gap: 14px; padding: 12px 0; align-items: flex-start; }
+  .tl .pill {
+    flex: none; width: 28px; height: 28px; border-radius: 50%;
+    background: oklch(0.30 0.07 252); color: white;
+    font-family: var(--t-mono); font-size: 11px;
+    display: grid; place-items: center;
+  }
+  .tl b { color: white; font-size: 14px; display: block; }
+  .tl span { color: oklch(0.78 0.04 250); font-size: 13px; }
+
+  .success {
+    display: none;
+    padding: 60px 24px;
+    text-align: center;
+    flex-direction: column; gap: 18px; align-items: center;
+  }
+  .success.show { display: flex; }
+  .success .badge-big {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: oklch(0.95 0.10 155);
+    display: grid; place-items: center;
+    color: var(--good);
+  }
+  .success h2 { font-size: 32px; }
+  .success p { color: var(--ink-soft); max-width: 50ch; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <div><span class="dot"></span>On-call for outage emergencies · Serving 50 mi around Oakwood, IL</div>
+    <div class="topbar-meta">
+      <span>Mon–Fri 7:30a–5:30p</span>
+      <a href="tel:9068698956"> (906) 869-8956</a>
+    </div>
+  </div>
+</div>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html"><img src="assets/logo.png" alt="Richmar Energies"/><span class="sub">Generac<br/>Authorized Dealer</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">Why Richmar</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="tel:9068698956">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+        (906) 869-8956
+      </a>
+      <a class="btn btn-primary" href="contact.html">Free quote</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ PAGE HERO ============ -->
+<section class="page-hero" style="background: var(--sky); padding-block: clamp(56px, 7vw, 96px);">
+  <div class="wrap">
+    <div style="font-family: var(--t-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 18px;"><a href="index.html" style="color: var(--brand-deep);">Home</a> / Contact</div>
+    <span class="eyebrow">Free, on-site, no pressure</span>
+    <h1 class="h-display" style="font-size: clamp(40px, 5.5vw, 76px); margin-top: 14px;">Tell us about your home. We'll do the rest.</h1>
+    <p class="lead">Three minutes now saves three days during an outage. Fill this out and we'll be in touch within one business day with next steps.</p>
+  </div>
+</section>
+
+<!-- ============ FORM SHELL ============ -->
+<section class="section section-tight">
+  <div class="wrap">
+    <div class="quote-shell">
+
+      <!-- ============ FORM ============ -->
+      <div class="quote-form" id="formPane">
+        <span class="eyebrow">Step 01 · About your property</span>
+        <h1 style="margin-top: 12px;">Request your free quote.</h1>
+        <p class="lead">Generac sizing comes down to your loads — A/C, well, sump, ovens, EV. The more you can share, the more accurate your starting quote.</p>
+
+        <div class="progress" id="progress">
+          <span class="active" data-step="1"><span class="n">1</span> Property</span>
+          <span data-step="2"><span class="n">2</span> Power need</span>
+          <span data-step="3"><span class="n">3</span> You</span>
+        </div>
+
+        <form id="quoteForm" novalidate>
+          <!-- STEP 1 -->
+          <fieldset id="step1" style="border: 0; padding: 0; margin: 0;">
+            <legend class="sr-only">About your property</legend>
+
+            <div class="field-grid">
+              <div class="field">
+                <label for="addr">Street address</label>
+                <input id="addr" type="text" placeholder="e.g. 412 Lincoln Ave" required />
+              </div>
+              <div class="field-grid two" style="margin-top: 0;">
+                <div class="field">
+                  <label for="city">City / town</label>
+                  <input id="city" type="text" placeholder="Oakwood" required />
+                </div>
+                <div class="field">
+                  <label for="zip">ZIP</label>
+                  <input id="zip" type="text" placeholder="61858" inputmode="numeric" required />
+                </div>
+              </div>
+              <div class="field">
+                <label>Property type</label>
+                <div class="choices">
+                  <label class="choice"><input type="radio" name="ptype" value="single"/>
+                    <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    <span class="ctop">Single-family</span><span class="cbot">Most common</span>
+                  </label>
+                  <label class="choice"><input type="radio" name="ptype" value="farm"/>
+                    <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    <span class="ctop">Farm / acreage</span><span class="cbot">+ outbuildings</span>
+                  </label>
+                  <label class="choice"><input type="radio" name="ptype" value="business"/>
+                    <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    <span class="ctop">Business / shop</span><span class="cbot">Commercial</span>
+                  </label>
+                </div>
+              </div>
+              <div class="field-grid two" style="margin-top: 0;">
+                <div class="field">
+                  <label for="sqft">Approx. size (sq ft)</label>
+                  <input id="sqft" type="text" placeholder="2,400" />
+                </div>
+                <div class="field">
+                  <label for="fuel">Fuel available</label>
+                  <select id="fuel">
+                    <option value="">Choose…</option>
+                    <option>Natural gas at the meter</option>
+                    <option>Propane tank on site</option>
+                    <option>No gas / both options possible</option>
+                    <option>Not sure</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- STEP 2 -->
+          <fieldset id="step2" style="border: 0; padding: 0; margin: 0; display: none;">
+            <legend class="sr-only">Your power need</legend>
+
+            <div class="field-grid">
+              <div class="field">
+                <label>What do you need to keep running?</label>
+                <div class="choices">
+                  <label class="choice"><input type="radio" name="scope" value="essentials"/>
+                    <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    <span class="ctop">Essentials only</span><span class="cbot">Lights, fridge, sump</span>
+                  </label>
+                  <label class="choice"><input type="radio" name="scope" value="whole"/>
+                    <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    <span class="ctop">Whole home</span><span class="cbot">A/C, oven, everything</span>
+                  </label>
+                  <label class="choice"><input type="radio" name="scope" value="critical"/>
+                    <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    <span class="ctop">Critical loads</span><span class="cbot">Medical, server, livestock</span>
+                  </label>
+                </div>
+              </div>
+              <div class="field">
+                <label>Timeline</label>
+                <div class="choices">
+                  <label class="choice"><input type="radio" name="when" value="asap"/>
+                    <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    <span class="ctop">ASAP</span><span class="cbot">Just lost power</span>
+                  </label>
+                  <label class="choice"><input type="radio" name="when" value="months"/>
+                    <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    <span class="ctop">Next 1–3 months</span><span class="cbot">Storm season</span>
+                  </label>
+                  <label class="choice"><input type="radio" name="when" value="research"/>
+                    <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    <span class="ctop">Researching</span><span class="cbot">Not in a hurry</span>
+                  </label>
+                </div>
+              </div>
+              <div class="field">
+                <label for="notes">Anything else we should know?</label>
+                <textarea id="notes" placeholder="Tenants, well pump, existing generator, EV charger, basement that floods, etc."></textarea>
+                <span class="hint">Helpful but optional. We'll cover the rest on the call.</span>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- STEP 3 -->
+          <fieldset id="step3" style="border: 0; padding: 0; margin: 0; display: none;">
+            <legend class="sr-only">Your contact info</legend>
+
+            <div class="field-grid">
+              <div class="field-grid two" style="margin-top: 0;">
+                <div class="field">
+                  <label for="fname">First name</label>
+                  <input id="fname" type="text" placeholder="Pat" required />
+                </div>
+                <div class="field">
+                  <label for="lname">Last name</label>
+                  <input id="lname" type="text" placeholder="Reynolds" required />
+                </div>
+              </div>
+              <div class="field-grid two" style="margin-top: 0;">
+                <div class="field">
+                  <label for="phone">Phone</label>
+                  <input id="phone" type="tel" placeholder="(217) 555-0142" required />
+                </div>
+                <div class="field">
+                  <label for="email">Email</label>
+                  <input id="email" type="email" placeholder="you@example.com" required />
+                </div>
+              </div>
+              <div class="field">
+                <label>Best way to reach you</label>
+                <div class="choices">
+                  <label class="choice"><input type="radio" name="contact" value="call"/>
+                    <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    <span class="ctop">Phone call</span><span class="cbot">Fastest</span>
+                  </label>
+                  <label class="choice"><input type="radio" name="contact" value="text"/>
+                    <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    <span class="ctop">Text message</span><span class="cbot">Easy</span>
+                  </label>
+                  <label class="choice"><input type="radio" name="contact" value="email"/>
+                    <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    <span class="ctop">Email</span><span class="cbot">Async</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="submit-row">
+            <button type="button" class="btn btn-ghost" id="backBtn" style="display: none;">← Back</button>
+            <button type="button" class="btn btn-primary btn-lg" id="nextBtn">Continue
+              <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+            </button>
+            <span class="reassurance">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              We don't share your info. One reply, then we let you breathe.
+            </span>
+          </div>
+        </form>
+
+        <!-- Success state -->
+        <div class="success" id="successPane">
+          <div class="badge-big">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h2 class="h-display">Thanks — we'll be in touch.</h2>
+          <p>Your request is in. We'll review your details and reach out within one business day to schedule the on-site walk-through. If it's urgent (power's out right now), call <a href="tel:9068698956" style="color: var(--brand-deep); font-weight: 600;">(906) 869-8956</a>.</p>
+        </div>
+
+      </div>
+
+      <!-- ============ RIGHT RAIL ============ -->
+      <aside class="quote-rail">
+        <div class="inner">
+          <h3>Or just pick up the phone.</h3>
+          <dl>
+            <div>
+              <dt>Call or text</dt>
+              <dd><a href="tel:9068698956">(906) 869-8956</a></dd>
+            </div>
+            <div>
+              <dt>Email</dt>
+              <dd><a href="mailto:info@richmarenergies.com">info@richmarenergies.com</a></dd>
+            </div>
+            <div>
+              <dt>Office</dt>
+              <dd>333 Birch Lane<br/>Oakwood, IL 61858</dd>
+            </div>
+            <div>
+              <dt>Hours</dt>
+              <dd>Mon–Fri · 7:30a–5:30p<br/><span style="color: var(--good); font-weight: 600;">On-call 24/7 during outages</span></dd>
+            </div>
+          </dl>
+
+          <div class="timeline-list">
+            <div style="font-family: var(--t-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: oklch(0.78 0.06 250); margin-bottom: 14px;">What happens next</div>
+            <div class="tl"><div class="pill">1</div><div><b>You hear back, fast</b><span>Owner replies within one business day — same number you'll have forever.</span></div></div>
+            <div class="tl"><div class="pill">2</div><div><b>Free on-site visit</b><span>30–45 minutes. Panel, gas, lot. No clipboards of pressure-tactics.</span></div></div>
+            <div class="tl"><div class="pill">3</div><div><b>Written quote</b><span>Plain English, line items, no surprises. Take a week to think it over.</span></div></div>
+            <div class="tl"><div class="pill">4</div><div><b>Install &amp; commission</b><span>Most homes are running on standby in under a week from approval.</span></div></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div class="brand-block">
+      <div class="logo"><img src="assets/logo.png" alt="Richmar Energies" /></div>
+      <p>Generac-certified standby generator sales, installation and service. Family-run, Oakwood-based, serving East-Central Illinois.</p>
+    </div>
+    <div>
+      <h5>Services</h5>
+      <ul>
+        <li><a href="services.html#sales">Generator sales</a></li>
+        <li><a href="services.html#installation">Installation</a></li>
+        <li><a href="services.html#maintenance">Maintenance plans</a></li>
+        <li><a href="services.html#emergency">Emergency service</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Company</h5>
+      <ul>
+        <li><a href="about.html">Why Richmar</a></li>
+        <li><a href="about.html#service-area">Service area</a></li>
+        <li><a href="contact.html">Free quote</a></li>
+        <li><a href="https://www.gendealers.com/dealer/richmar-energies-oakwood-il" rel="noopener" target="_blank">GenDealers listing</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Get in touch</h5>
+      <ul>
+        <li><a href="tel:9068698956">(906) 869-8956</a></li>
+        <li><a href="mailto:info@richmarenergies.com">info@richmarenergies.com</a></li>
+        <li>333 Birch Lane<br/>Oakwood, IL 61858</li>
+        <li>Mon–Fri · 7:30a–5:30p<br/>On-call during outages</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>© 2026 Richmar Energies · Licensed &amp; insured in Illinois</span>
+    <span>Generac® is a registered trademark of Generac Power Systems, Inc.</span>
+  </div>
+</footer>
+
+<script>
+  // Multi-step form
+  let step = 1;
+  const steps = [document.getElementById('step1'), document.getElementById('step2'), document.getElementById('step3')];
+  const progressItems = document.querySelectorAll('#progress span');
+  const nextBtn = document.getElementById('nextBtn');
+  const backBtn = document.getElementById('backBtn');
+
+  function render() {
+    steps.forEach((el, i) => el.style.display = (i === step - 1) ? 'block' : 'none');
+    progressItems.forEach((el, i) => {
+      el.classList.remove('active', 'done');
+      if (i + 1 === step) el.classList.add('active');
+      else if (i + 1 < step) el.classList.add('done');
+    });
+    backBtn.style.display = step > 1 ? 'inline-flex' : 'none';
+    nextBtn.innerHTML = step < 3
+      ? 'Continue <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>'
+      : 'Send my request <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>';
+  }
+  nextBtn.addEventListener('click', () => {
+    if (step < 3) { step++; render(); window.scrollTo({top: document.querySelector('.quote-shell').offsetTop - 20, behavior: 'smooth'}); }
+    else {
+      document.getElementById('quoteForm').style.display = 'none';
+      document.querySelector('.progress').style.display = 'none';
+      document.querySelector('.submit-row').style.display = 'none';
+      document.querySelector('.eyebrow').style.display = 'none';
+      document.querySelector('#formPane h1').style.display = 'none';
+      document.querySelector('#formPane .lead').style.display = 'none';
+      document.getElementById('successPane').classList.add('show');
+    }
+  });
+  backBtn.addEventListener('click', () => { if (step > 1) { step--; render(); }});
+  progressItems.forEach((el) => el.addEventListener('click', () => { step = +el.dataset.step; render(); }));
+  render();
+</script>
+
+</body>
+</html>

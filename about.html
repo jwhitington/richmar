@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Why Richmar — Local, Certified, Accountable · Richmar Energies</title>
+<meta name="description" content="A sole-proprietor Generac-authorized dealer in Oakwood, IL. Direct relationships, honest sizing, and the same person from quote to power-on." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .page-hero { background: var(--sky); padding-block: clamp(64px, 8vw, 120px); }
+  .breadcrumb { font-family: var(--t-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 18px; }
+  .breadcrumb a { color: var(--brand-deep); }
+
+  .pillars { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--hairline); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--hairline); }
+  @media (min-width: 880px) { .pillars { grid-template-columns: repeat(3, 1fr); } }
+  .pillar { background: var(--paper); padding: 32px; }
+  .pillar .num { font-family: var(--t-mono); font-size: 12px; color: var(--brand); letter-spacing: 0.1em; }
+  .pillar h3 { font-size: 24px; margin-top: 14px; }
+  .pillar p { color: var(--ink-soft); margin-top: 12px; }
+
+  /* Service area map */
+  .map-wrap {
+    background: var(--navy);
+    color: white;
+    border-radius: var(--radius-lg);
+    padding: clamp(32px, 4vw, 56px);
+    overflow: hidden;
+    display: grid; grid-template-columns: 1fr; gap: 32px; align-items: center;
+  }
+  @media (min-width: 980px) { .map-wrap { grid-template-columns: 1fr 1.2fr; } }
+  .map-wrap h2 { color: white; }
+  .map-wrap p { color: oklch(0.85 0.02 250); }
+
+  .area-map {
+    position: relative;
+    aspect-ratio: 1/1;
+    background: oklch(0.28 0.07 252);
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid oklch(0.34 0.08 252);
+  }
+  .area-map svg { width: 100%; height: 100%; display: block; }
+
+  .area-list {
+    column-count: 1; column-gap: 24px;
+    margin-top: 18px; font-size: 14px;
+  }
+  @media (min-width: 600px) { .area-list { column-count: 2; } }
+  .area-list span {
+    display: block; padding: 6px 0;
+    border-bottom: 1px dashed oklch(0.34 0.08 252);
+    color: oklch(0.92 0.01 250);
+    break-inside: avoid;
+  }
+
+  .creds-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  @media (min-width: 720px) { .creds-grid { grid-template-columns: repeat(2, 1fr); } }
+  .cred {
+    border: 1px solid var(--hairline); border-radius: var(--radius);
+    padding: 24px; background: var(--paper);
+    display: flex; gap: 20px; align-items: flex-start;
+  }
+  .cred .ic {
+    width: 48px; height: 48px; flex: none;
+    background: var(--sky); border-radius: 12px;
+    display: grid; place-items: center;
+    color: var(--brand-deep);
+    border: 1px solid var(--hairline);
+  }
+  .cred .ic svg { width: 22px; height: 22px; }
+  .cred h4 { font-size: 19px; margin-bottom: 6px; }
+  .cred p { color: var(--ink-soft); font-size: 14px; }
+
+  .story-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: start; }
+  @media (min-width: 980px) { .story-grid { grid-template-columns: 1fr 1.4fr; gap: 60px; } }
+  .story-grid .side .ph { aspect-ratio: 4/5; min-height: 0; }
+  .story-grid .copy p { color: var(--ink-soft); margin-top: 16px; font-size: 17px; }
+
+  .promise { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 30px; }
+  @media (min-width: 720px) { .promise { grid-template-columns: repeat(2, 1fr); } }
+  .promise li {
+    list-style: none; padding: 18px; background: var(--sky);
+    border-radius: 10px; font-size: 15px; display: flex; gap: 12px; align-items: flex-start;
+  }
+  .promise li b { color: var(--ink); display: block; margin-bottom: 4px; font-size: 14px; }
+  .promise li svg { width: 18px; height: 18px; flex: none; color: var(--brand); margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <div><span class="dot"></span>On-call for outage emergencies · Serving 50 mi around Oakwood, IL</div>
+    <div class="topbar-meta">
+      <span>Mon–Fri 7:30a–5:30p</span>
+      <a href="tel:9068698956"> (906) 869-8956</a>
+    </div>
+  </div>
+</div>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html"><img src="assets/logo.png" alt="Richmar Energies"/><span class="sub">Generac<br/>Authorized Dealer</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html" class="active">Why Richmar</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="tel:9068698956">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+        (906) 869-8956
+      </a>
+      <a class="btn btn-primary" href="contact.html">Free quote</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ PAGE HERO ============ -->
+<section class="page-hero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">Home</a> / Why Richmar</div>
+    <span class="eyebrow">A neighbor with a Generac certification</span>
+    <h1 class="h-display" style="font-size: clamp(40px, 5.5vw, 76px); margin-top: 14px;">Big-name product. Hometown accountability.</h1>
+    <p class="lead">Richmar Energies is a one-person shop on purpose. You get the same hands and the same phone number — from the first walk-through to the next decade of service visits.</p>
+  </div>
+</section>
+
+<!-- ============ STORY ============ -->
+<section class="section">
+  <div class="wrap story-grid">
+    <div class="side">
+      <div class="photo" style="aspect-ratio: 4/5;"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1400&q=80&auto=format&fit=crop" alt="Local technician on a residential job site" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/owner2/900/1100'" /></div>
+    </div>
+    <div class="copy">
+      <span class="eyebrow">The Richmar story</span>
+      <h2 class="h-display" style="margin-top: 12px;">Backup power, treated like the long-term commitment it actually is.</h2>
+      <p>Most generator companies treat the sale as the finish line. We treat it as the start. A standby generator is something you'll own for fifteen or twenty years — and the difference between one that runs and one that doesn't is almost always whether someone looked at it more than once.</p>
+      <p>Richmar Energies is based at 333 Birch Lane in Oakwood, Illinois. We're Generac-certified, fully licensed and insured, and we cover a 50-mile radius — from Champaign and Urbana east through Danville, Rantoul, and out into the farms between. We don't outsource installation. We don't subcontract service. The person who quotes your job is the person who shows up when it matters.</p>
+
+      <ul class="promise">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          <span><b>One person, start to finish</b>You'll have one number, one name, one truck — every visit, every year.</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          <span><b>Honest sizing, in writing</b>If a smaller unit fits your home, that's what we'll quote — with the math attached.</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          <span><b>Generac, all the way</b>Certified parts, certified labor, factory warranty registered for you on day one.</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          <span><b>Local, on call</b>Storm rolls in at 11pm? You'll get a real person on the phone, not a ticket number.</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PILLARS ============ -->
+<section class="section section-tight" style="background: var(--sky);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">What "local" actually means here</span>
+      <h2 class="h-display">Three commitments we won't compromise on.</h2>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="num">PILLAR 01</div>
+        <h3>One name on the work</h3>
+        <p>No middlemen, no scheduler queues. The owner is the technician — so accountability isn't a corporate value, it's just how the day works.</p>
+      </div>
+      <div class="pillar">
+        <div class="num">PILLAR 02</div>
+        <h3>The right size, not the biggest size</h3>
+        <p>Bigger generators cost more to buy, run, and maintain. We size to your real load profile so you spend on protection, not horsepower.</p>
+      </div>
+      <div class="pillar">
+        <div class="num">PILLAR 03</div>
+        <h3>The maintenance side counts</h3>
+        <p>A new install is a great day. Year seven is the real test. Our service plans exist because that's where most generators quietly stop being ready.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CREDENTIALS ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head two-col">
+      <div>
+        <span class="eyebrow">Credentials &amp; listings</span>
+        <h2 class="h-display">The certifications that actually matter for backup power.</h2>
+      </div>
+      <div class="col-r">Generac authorization isn't a sticker — it's annual training, code compliance, parts access, and the only path to keep your factory warranty fully intact.</div>
+    </div>
+
+    <div class="creds-grid">
+      <div class="cred">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 9.5 8 10 4.5-.5 8-5 8-10V6l-8-4Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <div>
+          <h4>Generac Authorized Dealer</h4>
+          <p>Annual factory training in sales, installation and service. Direct parts access and full warranty authority on every Generac product line — Guardian, Protector, PWRcell, and PowerPact.</p>
+        </div>
+      </div>
+      <div class="cred">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M8 4v6M16 4v6"/></svg></div>
+        <div>
+          <h4>Licensed &amp; insured in Illinois</h4>
+          <p>Liability and worker's-comp coverage on every job site. Permits pulled in your jurisdiction, work passed off by your local inspector.</p>
+        </div>
+      </div>
+      <div class="cred">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></div>
+        <div>
+          <h4>Listed on GenDealers.com</h4>
+          <p>Verified through Generac's official dealer directory. <a href="https://www.gendealers.com/dealer/richmar-energies-oakwood-il" rel="noopener" target="_blank" style="color: var(--brand-deep); font-weight: 600;">View our listing →</a></p>
+        </div>
+      </div>
+      <div class="cred">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div>
+          <h4>Locally owned, locally based</h4>
+          <p>Headquartered at 333 Birch Lane, Oakwood, IL 61858. Sole proprietor — the buck stops at the same desk that picks up the phone.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICE AREA ============ -->
+<section class="section" id="service-area">
+  <div class="wrap">
+    <div class="map-wrap">
+      <div>
+        <span class="eyebrow" style="color: oklch(0.80 0.10 250);">Service area</span>
+        <h2 class="h-display" style="margin-top: 14px; color: white;">50 miles around Oakwood, IL.</h2>
+        <p class="lead" style="margin-top: 18px;">If you're inside the circle, we'll quote the job, install the unit, and answer the phone when the power goes out. If you're just outside, ask anyway — we make exceptions for the right project.</p>
+        <div class="area-list" style="margin-top: 26px;">
+          <span>Oakwood, IL · (home)</span>
+          <span>Danville</span>
+          <span>Champaign</span>
+          <span>Urbana</span>
+          <span>Rantoul</span>
+          <span>Tuscola</span>
+          <span>Catlin</span>
+          <span>Georgetown</span>
+          <span>Mahomet</span>
+          <span>St. Joseph</span>
+          <span>Monticello</span>
+          <span>Hoopeston</span>
+        </div>
+      </div>
+      <div class="area-map" aria-label="Service area: 50 mile radius around Oakwood, IL">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <!-- subtle grid -->
+          <defs>
+            <pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M40 0H0V40" fill="none" stroke="oklch(0.34 0.08 252)" stroke-width="1"/>
+            </pattern>
+            <radialGradient id="zone" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="oklch(0.52 0.18 252)" stop-opacity="0.45"/>
+              <stop offset="65%" stop-color="oklch(0.52 0.18 252)" stop-opacity="0.15"/>
+              <stop offset="100%" stop-color="oklch(0.52 0.18 252)" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="400" height="400" fill="url(#g)"/>
+
+          <!-- 50 mile zone -->
+          <circle cx="200" cy="200" r="170" fill="url(#zone)"/>
+          <circle cx="200" cy="200" r="170" fill="none" stroke="oklch(0.72 0.18 50)" stroke-width="2" stroke-dasharray="4 6"/>
+
+          <!-- nearby city dots (illustrative) -->
+          <g fill="white" font-family="JetBrains Mono, monospace" font-size="9">
+            <circle cx="200" cy="200" r="6" fill="oklch(0.72 0.18 50)"/>
+            <circle cx="200" cy="200" r="11" fill="none" stroke="oklch(0.72 0.18 50)" stroke-width="2" opacity="0.5"/>
+            <text x="210" y="196">OAKWOOD, IL</text>
+            <text x="210" y="208" opacity="0.7">333 Birch Ln</text>
+
+            <circle cx="240" cy="195" r="3"/><text x="246" y="198">Danville</text>
+            <circle cx="135" cy="195" r="3"/><text x="98"  y="186">Champaign</text>
+            <circle cx="155" cy="190" r="3"/><text x="118" y="172">Urbana</text>
+            <circle cx="140" cy="155" r="3"/><text x="106" y="146">Rantoul</text>
+            <circle cx="115" cy="235" r="3"/><text x="73"  y="238">Tuscola</text>
+            <circle cx="215" cy="225" r="3"/><text x="221" y="240">Catlin</text>
+            <circle cx="240" cy="265" r="3"/><text x="246" y="268">Georgetown</text>
+            <circle cx="155" cy="120" r="3"/><text x="161" y="123">Hoopeston</text>
+          </g>
+
+          <!-- radius label -->
+          <text x="200" y="62" text-anchor="middle" fill="oklch(0.72 0.18 50)" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="2">50 MI RADIUS</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section" style="background: var(--sky);">
+  <div class="wrap" style="max-width: 980px;">
+    <div class="section-head">
+      <span class="eyebrow">Working with Richmar</span>
+      <h2 class="h-display">What to expect, in plain English.</h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>How fast can you get out for a quote?</summary>
+        <p>Usually within a week, faster outside of storm season. We bring a clipboard, look at your panel, your gas meter, and your lot, and you'll have a written quote within a few business days.</p>
+      </details>
+      <details>
+        <summary>Do I have to be a Generac person to work with you?</summary>
+        <p>We sell and service Generac because we're certified on it and because parts and warranty support are the best in class for our area. If you've got a different brand and need a one-time service call, ask — sometimes we can help, sometimes we'll refer.</p>
+      </details>
+      <details>
+        <summary>What if I'm just outside the 50-mile radius?</summary>
+        <p>Call anyway. We make exceptions for the right project, especially if you're a few miles past the line or part of a community we're already serving.</p>
+      </details>
+      <details>
+        <summary>Is financing available?</summary>
+        <p>Yes — through Generac's preferred finance partners, subject to approval. We can walk you through monthly payment estimates during your quote visit.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="cta-card">
+      <div class="inner">
+        <div>
+          <span class="eyebrow" style="color: oklch(0.80 0.10 250);">Talk to the owner directly</span>
+          <h2 class="h-display" style="margin-top:16px;">Same person from quote to power-on. Always.</h2>
+          <p>No call center, no rotating crew, no "the technician will reach out." Pick up the phone — that's the same number you'll have for the next decade.</p>
+        </div>
+        <div class="ctas">
+          <a class="btn btn-primary btn-lg" href="contact.html">Get my free quote</a>
+          <a class="btn btn-ghost btn-lg" style="background: transparent; color: white; border-color: oklch(0.45 0.10 252);" href="tel:9068698956">Call (906) 869-8956</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div class="brand-block">
+      <div class="logo"><img src="assets/logo.png" alt="Richmar Energies" /></div>
+      <p>Generac-certified standby generator sales, installation and service. Family-run, Oakwood-based, serving East-Central Illinois.</p>
+    </div>
+    <div>
+      <h5>Services</h5>
+      <ul>
+        <li><a href="services.html#sales">Generator sales</a></li>
+        <li><a href="services.html#installation">Installation</a></li>
+        <li><a href="services.html#maintenance">Maintenance plans</a></li>
+        <li><a href="services.html#emergency">Emergency service</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Company</h5>
+      <ul>
+        <li><a href="about.html">Why Richmar</a></li>
+        <li><a href="about.html#service-area">Service area</a></li>
+        <li><a href="contact.html">Free quote</a></li>
+        <li><a href="https://www.gendealers.com/dealer/richmar-energies-oakwood-il" rel="noopener" target="_blank">GenDealers listing</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Get in touch</h5>
+      <ul>
+        <li><a href="tel:9068698956">(906) 869-8956</a></li>
+        <li><a href="mailto:info@richmarenergies.com">info@richmarenergies.com</a></li>
+        <li>333 Birch Lane<br/>Oakwood, IL 61858</li>
+        <li>Mon–Fri · 7:30a–5:30p<br/>On-call during outages</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>© 2026 Richmar Energies · Licensed &amp; insured in Illinois</span>
+    <span>Generac® is a registered trademark of Generac Power Systems, Inc.</span>
+  </div>
+</footer>
+
+</body>
+</html>
